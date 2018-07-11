@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+	<div class="col-4">
+		
+		<div class="input-group mb-3">
+			<input ng-model="searchInputModel" type="text" class="form-control" placeholder="Введите адрес..." aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<button ng-click="searchBtnClick()" class="btn btn-outline-secondary" type="button">Найти!</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="col">
+		<div id="leafletmap" ng-init="initMap()" style="min-height:80vh;"></div>
+	</div>
+</div>
+
+<div class="row justify-content-around mt-2">
+	<div class="col-lg-4 col-sm-6" ng-if="yandexData">
+		<h5>Данные "Яндекс"</h5>
+		<ul class="list-group ng-if="yandexData.length"">
+			<a class="list-group-item list-group-item-action pt-1 pb-1" style="cursor:pointer;" ng-repeat="d in yandexData" ng-click="dataItemClick(d.pos)">
+				<i class="fas fa-globe-americas"></i>
+				{{d.title}}
+				<span ng-if="d.pos">({{d.pos[0]|number:2}}, {{d.pos[1]|number:2}})</span>
+				<span ng-if="!d.pos">(координаты отсутствуют)</span>
+			</a>
+		</ul>
+		<div class="loader" ng-if="!yandexData.length"></div>
+	</div>
+	<div class="col-lg-4 col-sm-6" ng-if="aigeoData">
+		<h5>Данные "24geo"</h5>
+		<ul class="list-group" ng-if="aigeoData.length">
+			<a class="list-group-item list-group-item-action pt-1 pb-1" style="cursor:pointer;" ng-repeat="d in aigeoData" ng-click="dataItemClick(d.pos)">
+				<i class="fas fa-globe-americas"></i>
+				{{d.title}}
+				<span ng-if="d.pos">({{d.pos[0]|number:2}}, {{d.pos[1]|number:2}})</span>
+				<span ng-if="!d.pos">(координаты отсутствуют)</span>
+			</a>
+		</ul>
+		<div class="loader" ng-if="!aigeoData.length"></div>
+	</div>
+</div>
